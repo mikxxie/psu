@@ -30,7 +30,7 @@ jobs:
               echo "Network OK"
 
               echo "=== Installing dependencies ==="
-              apk add --no-cache build-base curl-dev file
+              apk add --no-cache build-base curl-dev linux-headers file
               echo "Dependencies OK"
 
               echo "=== Building PSU ==="
