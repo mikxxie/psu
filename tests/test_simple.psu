@@ -1,0 +1,10 @@
+psload http
+
+var test = "hello world"
+echo test
+echo 'test=' ++ test
+
+var num = 42
+echo num
+
+psstart

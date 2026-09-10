@@ -1,0 +1,4 @@
+var x = "test_value"
+echo x
+
+psstart

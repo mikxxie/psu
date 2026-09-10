@@ -1,0 +1,12 @@
+psload http
+
+var test_string = "hello"
+echo test_string
+
+var test_double_quote = "world"
+echo 'Result: ' ++ test_double_quote
+
+var test_num = 123
+echo test_num
+
+psstart

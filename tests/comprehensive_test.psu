@@ -1,0 +1,30 @@
+// Test 1: Variable assignment with quotes and comments
+psload system
+psload net
+psload filesys
+
+// Assignment with double quotes
+var message = "Hello World"
+echo message
+
+// Assignment with single quotes
+var greeting = 'Welcome to PSU'
+echo greeting
+
+// Test 2: Concatenation with operators (tests // in code doesn't break)
+echo 'Message: ' ++ message
+echo 'Greeting: ' ++ greeting
+
+// Test 3: Network functions (not HTTP which needs external access)
+echo 'Your IP: ' ++ net.ip4
+var hostname = system.hostname
+echo 'Hostname: ' ++ hostname
+
+// Test 4: Math with comments in code
+psload math
+var radius = 5
+echo 'Area of circle: ' ++ (math.pi * radius * radius)
+
+echo 'All tests completed successfully!'
+
+psstart

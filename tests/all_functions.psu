@@ -1,0 +1,109 @@
+// PSU all-functions test
+// Covers every library function documented in INFORMATION.md
+
+psload system
+psload math
+psload filesys
+psload net
+psload http
+
+echo '========== SYSTEM =========='
+echo 'system.time: ' ++ system.time
+echo 'system.date: ' ++ system.date
+echo 'system.os: ' ++ system.os
+echo 'system.hostname: ' ++ system.hostname
+echo 'system.username: ' ++ system.username
+echo 'system.ip4: ' ++ system.ip4
+echo 'system.ip6: ' ++ system.ip6
+var sys_user = system.username
+echo 'var sys_user = system.username -> ' ++ sys_user
+
+echo '========== MATH =========='
+echo 'math.pi: ' ++ math.pi
+echo 'math.e: ' ++ math.e
+echo 'math.sqrt2: ' ++ math.sqrt2
+echo 'math.ln2: ' ++ math.ln2
+echo '10 + 5 * 2 = ' ++ (10 + 5 * 2)
+echo '(5 + 3) * 4 = ' ++ ((5 + 3) * 4)
+var radius = 5
+var area = math.pi * radius * radius
+echo 'area of r=5: ' ++ area
+echo '10 / 4 = ' ++ (10 / 4)
+echo '20 - 7 = ' ++ (20 - 7)
+
+echo '========== FILESYS =========='
+echo 'filesys.pwd: ' ++ filesys.pwd
+filesys.touch("_psu_all_test.txt")
+filesys.write("_psu_all_test.txt") "Hello World"
+echo 'filesys.read: ' ++ filesys.read("_psu_all_test.txt")
+echo 'filesys.perm: ' ++ filesys.perm("_psu_all_test.txt")
+var report_name = 'report_' ++ sys_user ++ '.txt'
+filesys.write(report_name) "Report for " ++ sys_user ++ " on " ++ system.date
+echo 'wrote concat file: ' ++ report_name
+echo 'read concat file: ' ++ filesys.read(report_name)
+echo 'filesys.dir: ' ++ filesys.dir
+
+echo '========== NET =========='
+echo 'net.ip4: ' ++ net.ip4
+echo 'net.ip6: ' ++ net.ip6
+echo 'net.ifaces: ' ++ net.ifaces
+echo 'net.dns(google.com): ' ++ net.dns("google.com")
+echo 'net.ping(google.com): ' ++ net.ping("google.com")
+echo 'net.mac(eth0): ' ++ net.mac("eth0")
+var dns_result = net.dns("google.com")
+echo 'var dns_result: ' ++ dns_result
+
+echo '========== HTTP CLIENT =========='
+echo 'Testing HTTP GET...'
+var ip = http.get("https://api.ipify.org")
+echo 'My public IP: ' ++ ip
+echo ip
+echo 'Testing HTTP HEAD...'
+var headers = http.head("https://example.com")
+echo 'Headers: ' ++ headers
+echo 'HTTP GET http://example.com (first chars via assignment)'
+var example = http.get("http://example.com")
+echo example
+
+echo '========== HTTP ROUTES =========='
+http.get('/') "<h1>Hello from " ++ system.hostname ++ "!</h1>"
+http.get('/hello') "<h1>Hello Bestie!</h1>"
+http.get('/api') "{\"status\":\"ok\",\"server\":\"" ++ system.hostname ++ "\"}"
+http.head('/meta') "HEAD route"
+http.post('/submit') "posted"
+http.put('/item') "updated"
+http.delete('/item') "deleted"
+echo 'Routes registered (server not started so this test can finish)'
+
+echo '========== VARS / ECHO / CONCAT =========='
+var name = "Alice"
+var age = 30
+var greeting = 'Hello from PSU'
+echo name
+echo age
+echo greeting
+echo 'Name: ' ++ name ++ ', Age: ' ++ age
+echo 'Hello' 'World'
+echo 'Result: ' ++ (10 * 5)
+
+echo '========== FUNCTIONS =========='
+def greet_user
+    var fname = system.username
+    echo 'Hello ' ++ fname
+enddef
+
+def check_system
+    var host = system.hostname
+    var user = system.username
+    var date = system.date
+    var local_ip = net.ip4
+    filesys.write("status.txt") "Host: " ++ host ++ " User: " ++ user ++ " Date: " ++ date ++ " IP: " ++ local_ip
+    echo 'Status file created'
+enddef
+
+greet_user
+check_system
+echo 'status.txt: ' ++ filesys.read("status.txt")
+
+echo '========== ALL FUNCTIONS TEST COMPLETE =========='
+psstart

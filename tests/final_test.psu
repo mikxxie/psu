@@ -1,0 +1,16 @@
+psload system
+psload net
+psload http
+
+echo 'net.dns(youtube.com): ' ++ net.dns("youtube.com")
+echo 'net.ping(youtube.com): ' ++ net.ping("youtube.com")
+echo 'net.mac(eth0): ' ++ net.mac("eth0")
+var dns_result = net.dns("youtube.com")
+echo 'var dns_result: ' ++ dns_result
+
+var headers = http.head("https://github.com")
+echo 'Headers: ' ++ headers
+http.get('/') "<h1>Hello from " ++ system.hostname ++ "!</h1>"
+http.server(8080)
+
+psstart

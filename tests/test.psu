@@ -1,0 +1,27 @@
+// Load required libraries
+psload http
+psload system
+psload net
+
+// Test HTTP GET
+echo 'Testing HTTP GET...'
+var ip = http.get("https://api.ipify.org")
+echo 'My public IP: ' ++ ip
+echo ip
+
+// Test HTTP HEAD
+echo 'Testing HTTP HEAD...'
+var headers = http.head("https://example.com")
+echo 'Headers: ' ++ headers
+
+// Test Network functions
+echo 'Testing Network...'
+echo 'IPv4: ' ++ net.ip4
+echo 'Interfaces: ' ++ net.ifaces
+echo 'DNS for google.com: ' ++ net.dns("google.com")
+
+// Start HTTP Server
+//echo 'Starting HTTP Server on port 8080...'
+//http.server(8080)
+
+psstart

@@ -1,0 +1,8 @@
+psload http
+
+echo 'Before HTTP call'
+var test = http.get("https://httpbin.org/ip")
+echo 'After HTTP call'
+echo test
+
+psstart

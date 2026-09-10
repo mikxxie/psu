@@ -1,0 +1,7 @@
+psload net
+
+echo net.dns("google.com")
+var dns_result = net.dns("google.com")
+echo dns_result
+
+psstart

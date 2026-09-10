@@ -1,0 +1,7 @@
+psload net
+
+var name = "Alice"
+echo 'Hello ' ++ name
+echo 'IP: ' ++ net.ip4
+
+psstart

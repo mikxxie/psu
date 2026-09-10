@@ -1,0 +1,21 @@
+// Load required libraries
+psload http
+psload system
+psload net
+
+// Test variables with quotes
+var url = "https://example.com"
+var test_str = 'This is a test'
+
+echo url
+echo test_str
+
+// Test Network functions  
+echo 'Testing Network...'
+echo 'IPv4: ' ++ net.ip4
+echo 'Interfaces: ' ++ net.ifaces
+
+// Test concatenation with /  / comments in URLs (this used to break)
+echo 'URL test passed'
+
+psstart
